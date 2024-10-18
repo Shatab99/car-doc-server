@@ -9,16 +9,7 @@ require('dotenv').config()
 
 
 // default middle ware
-app.use(cors(
-    {
-        origin: [
-            // 'http://localhost:5173',
-            'https://many-nail.surge.sh'
-        
-        ],
-        credentials: true
-    }
-))
+app.use(cors())
 app.use(express.json())
 app.use(cookieParser()) // for seeing the actual token in cookies and for  verifying purpose  
 
