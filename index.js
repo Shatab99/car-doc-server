@@ -154,6 +154,10 @@ async function run() {
             }
         })
 
+        app.post("/addService", async(req, res)=>{
+            res.send(await services.insertOne(req.body));
+        } )
+
         // user order 
         app.get('/userorder', logger,verifyToken, async (req, res) => {
             try {
