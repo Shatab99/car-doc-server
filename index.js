@@ -112,6 +112,11 @@ async function run() {
         //users
 
         app.post("/create-user", async(req, res)=>{
+            const {email}= req.body;
+            const isExists = await users.findOne({email})
+            if(isExists){
+                throw new Error("user is already exists !")
+            }
             const result = await users.insertOne(req.body)
             res.send(result)
         })
