@@ -19,25 +19,25 @@ app.get('/', (req, res) => {
 
 //  Custom middle ware for security purpose  and verifyng purpose 
 
-const logger = (req, res, next) => {
-    console.log("logged Info : ", req.method, req.url)
-    next()
-}
+// const logger = (req, res, next) => {
+//     console.log("logged Info : ", req.method, req.url)
+//     next()
+// }
 
-const verifyToken = (req, res, next) => {
-    const token = req.cookies.token;
-    console.log("Your Token is : ", token)
-    if(!token){
-        return res.status(401).send({message:"No access"});
-    }
-    jwt.verify(token, process.env.ACCESS_TOKEN_secret, (err, decoded)=>{
-        if(err){
-            return res.status(401).send({message:'Failed to authenticate'})
-        }
-        req.user= decoded;
-        next()
-    })
-}
+// const verifyToken = (req, res, next) => {
+//     const token = req.cookies.token;
+//     console.log("Your Token is : ", token)
+//     if(!token){
+//         return res.status(401).send({message:"No access"});
+//     }
+//     jwt.verify(token, process.env.ACCESS_TOKEN_secret, (err, decoded)=>{
+//         if(err){
+//             return res.status(401).send({message:'Failed to authenticate'})
+//         }
+//         req.user= decoded;
+//         next()
+//     })
+// }
 
 
 
@@ -150,7 +150,7 @@ async function run() {
         } )
 
         // user order 
-        app.get('/userorder', logger,verifyToken, async (req, res) => {
+        app.get('/userorder', async (req, res) => {
             try {
                 console.log("valid User : ", req.user);
                 console.log('Cookies : ', req.cookies.token)
