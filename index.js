@@ -150,6 +150,17 @@ async function run() {
         } )
 
         // user order 
+        app.get('/userorder', async (req, res) => {
+            try {
+                const cursor = userOders.find()
+                const result = await cursor.toArray()
+                res.send(result)
+            }
+            catch (error) {
+                console.log(error)
+            }
+        })
+        
         app.get('/userorder/:email', async (req, res) => {
             try {
                 const email = req.params.email
