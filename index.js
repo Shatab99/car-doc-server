@@ -150,19 +150,10 @@ async function run() {
         } )
 
         // user order 
-        app.get('/userorder', async (req, res) => {
+        app.get('/userorder/:email', async (req, res) => {
             try {
-                console.log("valid User : ", req.user);
-                console.log('Cookies : ', req.cookies.token)
-                // set up authorized person to get data 
-                if(req.user.email !== req.query.email){
-                    return res.status(403).send({message : 'forbiden access !!'}) 
-                }
-                let query = {}
-                if (req.query?.email) {
-                    query = { email: req.query.email }
-                }
-                const cursor = userOders.find(query)
+                const email = req.params.email
+                const cursor = userOders.find({email})
                 const result = await cursor.toArray()
                 res.send(result)
             }
